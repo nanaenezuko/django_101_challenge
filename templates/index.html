@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load thumbnail %}
+
+{% block title %}Home Page{% endblock title %}
+
+{% block body %}
+    {% for post in photo_post %}
+        <a href={% url 'photouploader:detail' post.id %}>
+        <h4>{{ post.title }}</h4>
+        {% thumbnail post.image "150x150" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        {% endthumbnail %}
+        </a>
+        <p> {{ post.caption }} </p>
+        <hr>
+    {% endfor %}
+{% endblock body %}
